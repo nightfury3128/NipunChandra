@@ -366,3 +366,84 @@ body.dark-mode {
     z-index: -2;
     pointer-events: none;
 }
+
+
+/* Navbar Styles */
+#navbar {
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    color: #1E2A38;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px; /* Adjusted padding */
+    gap: 10px; /* Space between items */
+}
+
+#navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+#navbar-picture {
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#social-links {
+    display: flex;
+    gap: 10px; /* Space between icons */
+}
+
+#social-links a {
+    display: inline-block;
+}
+
+#social-links img {
+    width: 25px; /* Adjust size as needed */
+    height: 25px; /* Adjust size as needed */
+    transition: opacity 0.3s ease;
+}
+
+#social-links a:hover img {
+    opacity: 0.7; /* Slight fade effect on hover */
+}
+
+/* Existing Navbar Styles */
+#navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Display items in a row */
+    gap: 15px; /* Space between items */
+}
+
+#navbar a {
+    padding: 10px;
+    font-size: 16px;
+    color: #1E2A38;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#navbar a:hover {
+    color: #F4A261; /* Highlight color on hover */
+}
+
+/* Dark Mode Styles */
+.dark-mode #social-links img {
+    filter: brightness(0.8); /* Dark mode adjustment */
+}
+
+.dark-mode #social-links a:hover img {
+    opacity: 1; /* Remove fade effect on hover */
+}   

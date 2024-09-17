@@ -1,0 +1,368 @@
+/* Global Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    background: linear-gradient(to bottom right, #F4F7FC, #d0e3f0); /* Gradient background */
+    color: #1E2A38; /* Dark text color */
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Navbar Styles */
+#navbar {
+    margin: 0;
+    padding: 0;
+    background: #FFFFFF;
+    color: #1E2A38;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 100px; /* Adjusted padding */
+}
+
+/* Header Styles */
+header {
+    margin: 0;
+    padding: 50px 0; /* Reduced padding for smaller header */
+    text-align: center;
+    background-color: #264653;
+    color: #FFFFFF;
+    position: relative; /* Ensure proper stacking */
+}
+
+/* Navbar Links */
+#navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; /* Display items in a row */
+    gap: 15px; /* Space between items */
+}
+
+#navbar a {
+    padding: 10px;
+    font-size: 16px;
+    color: #1E2A38;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#navbar a:hover {
+    color: #F4A261; /* Highlight color on hover */
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background: linear-gradient(to bottom right, #121212, #1e1e1e); /* Dark gradient background */
+    color: #E0E0E0; /* Light text color */
+}
+
+.dark-mode #navbar {
+    background: #1E1E1E; /* Dark background */
+    color: #E0E0E0; /* Light text color */
+}
+
+.dark-mode #navbar a {
+    color: #E0E0E0; /* Light link color */
+}
+
+.dark-mode #navbar a:hover {
+    color: #F4A261; /* Highlight color on hover */
+}
+
+.dark-mode header {
+    background-color: #1E1E1E; /* Dark background for header */
+}
+
+.dark-mode .content-box {
+    background: #1E1E1E;
+    color: #E0E0E0;
+}
+
+.dark-mode a {
+    color: #BB86FC;
+}
+
+.dark-mode a:hover {
+    color: #F4A261;
+}
+
+/* Card Styles */
+.project {
+    position: relative; /* Removed tooltip dependency */
+    cursor: pointer; /* Indicate that the element is clickable */
+}
+
+.project:hover {
+    background-color: #f9811f;
+    color: #FFFFFF;
+    transition: background-color 0.3s, transform 0.3s;
+    transform: scale(1.05);
+}
+
+/* Content Box */
+.content-box {
+    background: #FFFFFF;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; /* Removed tooltip dependency */
+}
+
+.content-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    background: #f9811f; /* Light background on hover */
+    border: 2px solid #F4A261; /* Border color on hover */
+}
+
+/* Fade-In Animation */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide-In Animation */
+.slide-in {
+    opacity: 0;
+    animation: slideIn 1.5s forwards;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Dark Mode Toggle */
+button#darkModeToggle {
+    position: relative;
+    width: 60px;
+    height: 35px;
+    border-radius: 20px;
+    background: #1E2A38;
+    border: none;
+    color: #f9811f;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+button#darkModeToggle::before {
+    content: '🌙';
+    font-size: 1.5em;
+    transition: all 0.3s ease;
+}
+
+.dark-mode button#darkModeToggle::before {
+    content: '🌞';
+}
+
+button#darkModeToggle:hover {
+    background: #f9811f;
+    color: #1E2A38;
+}
+
+/* Typewriter Effect */
+#typewriter {
+    font-size: 1.2em;
+    font-family: 'Roboto', sans-serif;
+    color: #F4A261;
+    overflow: hidden; /* Ensures the text is hidden as it’s being typed */
+    white-space: nowrap;
+    border-right: 3px solid #f9811f; /* Cursor effect */
+    animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #f9811f; }
+}
+
+/* Parallax Background */
+#parallax-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('your-image-url.jpg') no-repeat center center fixed;
+    background-size: cover;
+    transform: translateZ(-1px) scale(1.5);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Container Styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* Center horizontally */
+    padding: 0 20px; /* Horizontal padding */
+    margin-top: 80px; /* Space below the header */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+#scrollProgress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 5px;
+    background: #f9811f;
+    z-index: 1001;
+    transition: width 0.25s ease;
+}
+
+.scroll-hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.dark-mode header,
+.dark-mode .content-box {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+@keyframes rotateIcon {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+button#darkModeToggle {
+    transition: transform 0.3s;
+}
+
+button#darkModeToggle:active {
+    animation: rotateIcon 0.5s linear;
+}
+
+.fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-on-scroll.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.transition {
+    transition: background 1s, color 1s;
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.greeting-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.greeting-message {
+    font-size: 2em;
+    color: #ff8000; /* Match greeting color with body text color */
+    font-family: 'Arial', sans-serif; /* Customize the font as per your style */
+    transition: color 0.3s ease-in-out; /* Optional: smooth transition when text changes */
+}
+
+.nav-active {
+    border-bottom: 2px solid #F4A261;
+    font-weight: bold;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in,
+.slide-in {
+    opacity: 0;
+    transform: translateY(30px); /* For fade-in */
+    transform: translateX(-50px); /* For slide-in */
+    transition: opacity 1.5s ease, transform 1.5s ease;
+}
+
+/* Date Card Styles */
+.date-card {
+    display: inline-block;
+    background: #F4A261;
+    color: #FFF;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    margin-left: 5px;
+    position: relative;
+}
+
+#parallax-background-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('your-second-image-url.jpg') no-repeat center center fixed;
+    background-size: cover;
+    transform: translateZ(-2px) scale(2);
+    z-index: -2;
+    pointer-events: none;
+}

@@ -1,9 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
+    initGreeting();
+    initDarkMode();
+    initScrollProgress();
+    initRevealOnScroll();
+    initParallaxEffect();
+    initNavLinks();
+    initIntersectionObserver();
+});
+
+function initGreeting() {
     const greetingElement = document.querySelector('.greeting-message');
-    const currentHour = new Date().getHours(); // Get the current hour
+    const currentHour = new Date().getHours();
     let greetingText = '';
 
-    // Determine the appropriate greeting based on the time of day
     if (currentHour < 12) {
         greetingText = 'Good Morning!';
     } else if (currentHour < 18) {
@@ -14,13 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let charIndex = 0;
     let isTyping = true;
+    const typingDelay = 100;
+    const erasingDelay = 50;
 
     function type() {
         if (isTyping) {
             if (charIndex < greetingText.length) {
-                greetingElement.textContent += greetingText[charIndex];
-                charIndex++;
-                setTimeout(type, 100);
+                greetingElement.textContent += greetingText[charIndex++];
+                setTimeout(type, typingDelay);
             } else {
                 isTyping = false;
                 setTimeout(erase, 1500);
@@ -31,9 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
     function erase() {
         if (!isTyping) {
             if (charIndex > 0) {
-                greetingElement.textContent = greetingText.substring(0, charIndex - 1);
-                charIndex--;
-                setTimeout(erase, 50);
+                greetingElement.textContent = greetingText.substring(0, --charIndex);
+                setTimeout(erase, erasingDelay);
             } else {
                 isTyping = true;
                 setTimeout(type, 500);
@@ -41,108 +50,115 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Start typing the greeting when the page loads
     type();
-});
-
-
-const darkModeToggle = document.getElementById('darkModeToggle');
-darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '🌞' : '🌙';
-});
-
-window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    document.getElementById("scrollProgress").style.width = scrolled + "%";
-});
-
-const revealElements = document.querySelectorAll('.fade-in, .slide-in');
-
-function revealOnScroll() {
-    const windowHeight = window.innerHeight;
-    revealElements.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) {
-            el.classList.add('scroll-visible');
-        } else {
-            el.classList.remove('scroll-visible');
-        }
-    });
 }
 
-window.addEventListener('scroll', revealOnScroll);
-revealOnScroll(); // trigger on page load
+function initDarkMode() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        darkModeToggle.textContent = isDarkMode ? '🌞' : '🌙';
+        localStorage.setItem('darkMode', isDarkMode);
+    }
 
-const projects = document.querySelectorAll('.project');
-projects.forEach(project => {
-    project.addEventListener('mouseover', () => {
-        const tooltip = document.createElement('div');
-        tooltip.classList.add('tooltip');
-        tooltip.textContent = project.getAttribute('data-tooltip');
-        project.appendChild(tooltip);
-        tooltip.style.display = 'block';
-    });
+    darkModeToggle.addEventListener('click', toggleDarkMode);
 
-    project.addEventListener('mouseout', () => {
-        const tooltip = project.querySelector('.tooltip');
-        if (tooltip) tooltip.remove();
-    });
-});
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = '🌞';
+    }
+}
 
-window.addEventListener('scroll', function() {
-    const scrollPosition = window.pageYOffset;
-    const parallax = document.getElementById('parallax-background');
-    parallax.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
-});
+function initScrollProgress() {
+    const scrollProgress = document.getElementById("scrollProgress");
 
-const faders = document.querySelectorAll('.fade-in-on-scroll');
-window.addEventListener('scroll', () => {
-    faders.forEach(fader => {
-        const rect = fader.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-            fader.classList.add('active');
+    function updateScrollProgress() {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        scrollProgress.style.width = (winScroll / height) * 100 + "%";
+    }
+    window.addEventListener('scroll', debounce(updateScrollProgress, 50));
+}
+
+function initRevealOnScroll() {
+    const revealElements = document.querySelectorAll('.fade-in, .slide-in');
+
+    function revealOnScroll() {
+        const windowHeight = window.innerHeight;
+        revealElements.forEach(el => {
+            const elementTop = el.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) {
+                el.classList.add('scroll-visible');
+            } else {
+                el.classList.remove('scroll-visible');
+            }
+        });
+    }
+    window.addEventListener('scroll', debounce(revealOnScroll, 50));
+    revealOnScroll();
+}
+
+function initParallaxEffect() {
+    const parallaxBackground = document.getElementById('parallax-background');
+    const parallaxBackground2 = document.getElementById('parallax-background-2');
+
+    function onScroll() {
+        const scrollPosition = window.pageYOffset;
+        parallaxBackground.style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
+        parallaxBackground2.style.transform = 'translateY(' + scrollPosition * 0.25 + 'px)';
+    }
+    window.addEventListener('scroll', throttle(onScroll, 50));
+}
+
+function initNavLinks() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('#navbar a');
+
+    function updateNavLinks() {
+        let index = sections.length;
+        while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
+        navLinks.forEach(link => link.classList.remove('nav-active'));
+        if (navLinks[index]) {
+            navLinks[index].classList.add('nav-active');
         }
-    });
-});
+    }
+    window.addEventListener('scroll', debounce(updateNavLinks, 50));
+}
 
-const sections = document.querySelectorAll('section');
-const navLinks = document.querySelectorAll('#navbar a');
+function initIntersectionObserver() {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
 
-window.addEventListener('scroll', () => {
-    let index = sections.length;
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            entry.target.classList.toggle('visible', entry.isIntersecting);
+        });
+    }, observerOptions);
 
-    while (--index && window.scrollY + 50 < sections[index].offsetTop) {}
+    document.querySelectorAll('.fade-in, .slide-in').forEach(element => observer.observe(element));
+}
 
-    navLinks.forEach((link) => link.classList.remove('nav-active'));
-    navLinks[index].classList.add('nav-active');
-});
-
-// Animate content on scroll
-const fadeInElements = document.querySelectorAll('.fade-in');
-const slideInElements = document.querySelectorAll('.slide-in');
-
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+// Utility Functions
+function throttle(fn, wait) {
+    let lastTime = 0;
+    return function(...args) {
+        const now = Date.now();
+        if (now - lastTime >= wait) {
+            lastTime = now;
+            fn(...args);
         }
-    });
-}, observerOptions);
+    }
+}
 
-fadeInElements.forEach(element => observer.observe(element));
-slideInElements.forEach(element => observer.observe(element));
-
-window.addEventListener('scroll', function() {
-    const scrollPosition = window.pageYOffset;
-    document.getElementById('parallax-background').style.transform = 'translateY(' + scrollPosition * 0.5 + 'px)';
-    document.getElementById('parallax-background-2').style.transform = 'translateY(' + scrollPosition * 0.25 + 'px)';
-});
+function debounce(fn, delay) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => fn(...args), delay);
+    }
+}

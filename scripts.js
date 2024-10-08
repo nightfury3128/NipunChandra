@@ -162,3 +162,32 @@ function debounce(fn, delay) {
         timeout = setTimeout(() => fn(...args), delay);
     }
 }
+
+function createFloatingElements() {
+    const container = document.getElementById('floating-elements');
+    for (let i = 0; i < 20; i++) {
+        const shape = document.createElement('div');
+        shape.classList.add('floating-shape');
+        shape.style.top = `${Math.random() * 100}vh`;
+        shape.style.left = `${Math.random() * 100}vw`;
+        shape.style.width = `${Math.random() * 30 + 10}px`;
+        shape.style.height = shape.style.width;
+        shape.style.animationDuration = `${Math.random() * 5 + 5}s`;
+        container.appendChild(shape);
+    }
+}
+
+function initFloatingElements() {
+    const floatingShapes = document.querySelectorAll('.floating-shape');
+    floatingShapes.forEach(shape => {
+      shape.addEventListener('mouseover', () => {
+        shape.style.transform = 'scale(1.2) rotate(45deg)';
+      });
+      shape.addEventListener('mouseout', () => {
+        shape.style.transform = 'scale(1) rotate(0deg)';
+      });
+    });
+  }
+
+
+document.addEventListener("DOMContentLoaded", createFloatingElements);

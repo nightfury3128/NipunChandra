@@ -287,6 +287,15 @@ html {
     transition: color 0.3s ease-in-out;
 }
 
+.greeting-message {
+    display: inline-block;
+    min-width: 200px; /* Set this to the minimum width that can hold the longest greeting */
+    height: 50px; /* Ensure the height is consistent */
+    overflow: hidden; /* To prevent any overflow issues */
+    vertical-align: middle; /* Align the text vertically if necessary */
+    font-size: 30px; /* Adjust according to your design */
+}
+
 /* Navbar Logo and Social Links */
 #navbar-logo {
     display: flex;
@@ -318,6 +327,7 @@ html {
 #social-links a:hover img {
     opacity: 0.7;
 }
+
 
 /* Date Card Styles */
 .date-card {
@@ -362,4 +372,167 @@ html {
 
 .slide-in {
     transform: translateX(-50px);
+}
+
+#scrollProgress {
+    background: linear-gradient(90deg, #f9811f, #f9c11f, #61dafb);
+}
+
+.fade-in {
+    transition: opacity 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 1.5s ease;
+}
+
+#social-links img:hover {
+    transform: rotate(360deg);
+    transition: transform 0.5s ease;
+}
+
+
+button#darkModeToggle {
+    transition: transform 0.3s ease, background-color 0.6s ease, color 0.6s ease;
+}
+
+button#darkModeToggle:hover {
+    transform: scale(1.1);
+}
+
+button#darkModeToggle:active {
+    animation: spinToggle 0.6s linear;
+}
+
+@keyframes spinToggle {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+#scrollProgress {
+    background: radial-gradient(circle, #f9811f, #f4a261);
+    height: 8px;
+    transition: width 0.25s ease, background 0.5s ease;
+}
+
+#scrollProgress.pulsing {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { height: 5px; }
+    50% { height: 8px; }
+    100% { height: 5px; }
+}
+
+#floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.floating-shape {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 165, 0, 0.7);
+    border-radius: 50%;
+    animation: float 10s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(100px, 200px); }
+    100% { transform: translate(0, 0); }
+}
+
+#parallax-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('path_to_your_background_image.jpg') no-repeat center center / cover;
+    z-index: -1;
+    transition: transform 0.1s ease-out;
+}
+
+#content {
+    position: relative;
+    z-index: 1;
+    padding: 100px; /* Your page content */
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    background-color: #ffcc00; /* Spider-Man yellow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform-origin: top center;
+    transition: transform 0.3s ease;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: rotate(-5deg) translateX(10px); /* Swinging effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.card:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: white;
+    transform: translateX(-50%);
+}
+
+#webButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #ff0000; /* Spider-Man red */
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#webButton:hover {
+    transform: scale(1.1);
+}
+
+#webButton:active {
+    animation: shoot-web 0.5s ease-in-out forwards;
+}
+
+@keyframes shoot-web {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5) translateY(-20px); }
+    100% { transform: scale(0) translateY(-50px); }
 }

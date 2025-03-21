@@ -1,20 +1,42 @@
-/* Global Reset */
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    padding: 0;
+:root {
+    /* Primary colors */
+    --primary: #4361ee;
+    --primary-light: #7db6f8;
+    --primary-dark: #3a49f0;
+    
+    /* Accent colors */
+    --accent: #f72585;
+    --accent-light: #ff70a6;
+    --accent-hover: #b5179e;
+    
+    /* Neutral colors */
+    --dark: #1f2937;
+    --medium: #4b5563;
+    --light: #f3f4f6;
+    --white: #ffffff;
+    
+    /* Additional */
+    --success: #10b981;
+    --warning: #fbbf24;
+    --error: #ef4444;
+    
+    /* Dark mode colors */
+    --dark-bg: #111827;
+    --dark-surface: #1f2937;
+    --dark-text: #e5e7eb;
+  }
+  
+  body {
+    background: linear-gradient(135deg, var(--light), #e2e8f0);
+    color: var(--dark);
     font-family: 'Raleway', sans-serif;
-    background: linear-gradient(to bottom right, #F4F7FC, #d0e3f0);
-    color: #1E2A38;
-    transition: background-color 0.5s, color 0.5s;
-}
+    transition: all 0.4s ease;
+  }
+  
+  .dark-mode {
+    background: linear-gradient(135deg, var(--dark-bg), #0f172a);
+    color: var(--dark-text);
+  }
 
 /* Navbar Styles */
 #navbar {

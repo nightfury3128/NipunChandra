@@ -1,37 +1,79 @@
 :root {
-    /* Primary colors */
-    --primary: #4361ee;
-    --primary-light: #7db6f8;
-    --primary-dark: #3a49f0;
+    /* Modern color palette */
+    --primary: #3a86ff;
+    --primary-light: #8ecae6;
+    --primary-dark: #0077b6;
     
-    /* Accent colors */
-    --accent: #f72585;
-    --accent-light: #ff70a6;
-    --accent-hover: #b5179e;
+    /* More vibrant accent colors */
+    --accent: #4cc9f0;       /* Bright cyan instead of pink */
+    --accent-light: #90e0ef; /* Light cyan instead of light pink */
+    --accent-hover: #fb5607;
     
-    /* Neutral colors */
-    --dark: #1f2937;
-    --medium: #4b5563;
-    --light: #f3f4f6;
+    /* Refined neutral colors */
+    --dark: #023047;
+    --medium: #457b9d;
+    --light: #f8f9fa;
     --white: #ffffff;
     
     /* Additional */
-    --success: #10b981;
-    --warning: #fbbf24;
-    --error: #ef4444;
+    --success: #06d6a0;
+    --warning: #ffbe0b;
+    --error: #d90429;
     
-    /* Dark mode colors */
-    --dark-bg: #111827;
-    --dark-surface: #1f2937;
-    --dark-text: #e5e7eb;
-  }
-  
-  body {
-    background: linear-gradient(135deg, var(--light), #e2e8f0);
+    /* Dark mode colors - improved contrast */
+    --dark-bg: #0d1b2a;
+    --dark-surface: #1b263b;
+    --dark-text: #e0e1dd;
+    
+    /* Gradient backgrounds */
+    --light-gradient: linear-gradient(135deg, var(--light) 0%, #caf0f8 50%, var(--primary-light) 100%);
+    --dark-gradient: linear-gradient(135deg, var(--dark-bg) 0%, #1e3a5f 50%, #2c5282 100%);
+}
+
+/* Apply gradient background to body */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: var(--light-gradient);
+    background-attachment: fixed;
     color: var(--dark);
-    font-family: 'Raleway', sans-serif;
-    transition: all 0.4s ease;
-  }
+    transition: background 0.5s ease, color 0.5s ease;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Dark mode body gradient */
+body.dark-mode {
+    background: var(--dark-gradient);
+    background-attachment: fixed;
+    color: var(--dark-text);
+}
+
+/* Subtle gradient overlay for content sections */
+.content-box {
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+/* Dark mode content boxes */
+body.dark-mode .content-box {
+    background-color: rgba(27, 38, 59, 0.85);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhance section transitions */
+section {
+    position: relative;
+    z-index: 1;
+    padding: 50px 0;
+    position: relative;
+}
   
   .dark-mode {
     background: linear-gradient(135deg, var(--dark-bg), #0f172a);
@@ -63,15 +105,27 @@
 }
 
 #navbar a {
+    position: relative;
     padding: 10px;
     font-size: 16px;
-    color: #1E2A38;
+    color: var(--dark);
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
-#navbar a:hover {
-    color: #F4A261;
+#navbar a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s ease;
+}
+
+#navbar a:hover::after {
+    width: 100%;
 }
 
 /* Dark Mode Styles */
@@ -137,10 +191,11 @@ header {
 }
 
 .content-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-    background: #f9811f;
-    border: 2px solid #F4A261;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, var(--accent-light), var(--accent));
+    color: var(--white);
+    border: none;
 }
 
 /* Project Styles */
@@ -557,4 +612,50 @@ button#darkModeToggle:active {
     0% { transform: scale(1); }
     50% { transform: scale(1.5) translateY(-20px); }
     100% { transform: scale(0) translateY(-50px); }
+}
+
+.skills-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.skills-bar {
+    width: 70%;
+    height: 10px;
+    background-color: var(--light);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.skills-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 5px;
+    transform: translateX(-100%);
+    transition: transform 1s ease-out;
+}
+
+.visible .skills-progress {
+    transform: translateX(0);
+}
+
+.theme-selector {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.theme-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
 }

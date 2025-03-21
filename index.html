@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="theme-color" content="#3a86ff">
 </head>
 <body>
     
@@ -22,7 +22,7 @@
             <img src="Nipun.jpg" alt="Nipun Chandra" id="navbar-picture">
         </div>
         <ul>
-            <li><a href="#about">About</a></li>
+            <li><a href="""#about">About</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#training">Training</a></li>
             <li><a href="#projects">Projects</a></li>
@@ -42,7 +42,7 @@
             </a>
         </div>
         <!-- Dark Mode Toggle with Emojis -->
-        <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙</button>
+        <button id="darkModeToggle" aria-label="Toggle Dark Mode" class="interactive-btn">🌙</button>
     </nav>
     <!-- Header Section -->
     <header>
@@ -61,7 +61,14 @@
         </div>
 
     </header>
-    <button id="webButton">🕸️</button>
+    <button id="webButton" aria-label="Web Animation" class="interactive-btn">🕸️</button>
+    <button id="scrollTopBtn" aria-label="Scroll to top">↑</button>
+
+    <div class="theme-selector">
+        <button class="theme-btn" data-theme="default" aria-label="Default theme"></button>
+        <button class="theme-btn" data-theme="ocean" aria-label="Ocean theme"></button>
+        <button class="theme-btn" data-theme="sunset" aria-label="Sunset theme"></button>
+    </div>
 
     <!-- About Me Section -->
     <section id="about">
@@ -102,10 +109,16 @@
     <section id="projects">
         <div class="container slide-in">
             <h2>Projects</h2>
-            <div class="project content-box" data-tooltip="Aug 2024">
-                <h3>GameVault</h3>
-                <p><strong>Technologies:</strong> HTML, CSS, Python, JavaScript</p>
-                <p>Organized video games collection with metadata, working on UI improvement and cross-platform access.</p>
+            <div class="projects-container">
+                <div class="project content-box" data-tooltip="Aug 2024">
+                    <div class="project-overlay">
+                        <a href="#" class="project-link">View Project</a>
+                    </div>
+                    <h3>GameVault</h3>
+                    <p><strong>Technologies:</strong> HTML, CSS, Python, JavaScript</p>
+                    <p>Organized video games collection with metadata, working on UI improvement and cross-platform access.</p>
+                </div>
+                <!-- Repeat for other projects -->
             </div>
             <div class="project content-box" data-tooltip="Aug 2022">
                 <h3>The Relationship between Stress and Obesity</h3>
@@ -133,12 +146,44 @@
     <section id="skills">
         <div class="container slide-in">
             <h2>Skills</h2>
-            <ul class="content-box">
-                <li><strong>Programming Languages:</strong> C++, Python, Java</li>
-                <li><strong>Web Development:</strong> HTML, CSS, JavaScript</li>
-                <li><strong>Tools & Platforms:</strong> GCP, BigQuery, Docker</li>
-                <li><strong>Operating Systems:</strong> Windows, Mac OSX, Linux</li>
-            </ul>
+            <div class="content-box">
+                <div class="skills-item">
+                    <span>C++</span>
+                    <div class="skills-bar">
+                        <div class="skills-progress" style="width: 85%;"></div>
+                    </div>
+                </div>
+                <div class="skills-item">
+                    <span>Python</span>
+                    <div class="skills-bar">
+                        <div class="skills-progress" style="width: 90%;"></div>
+                    </div>
+                </div>
+                <div class="skills-item">
+                    <span>Java</span>
+                    <div class="skills-bar">
+                        <div class="skills-progress" style="width: 75%;"></div>
+                    </div>
+                </div>
+                <div class="skills-item">
+                    <span>HTML/CSS</span>
+                    <div class="skills-bar">
+                        <div class="skills-progress" style="width: 95%;"></div>
+                    </div>
+                </div>
+                <div class="skills-item">
+                    <span>JavaScript</span>
+                    <div class="skills-bar">
+                        <div class="skills-progress" style="width: 80%;"></div>
+                    </div>
+                </div>
+                <div class="skills-item">
+                    <span>GCP/BigQuery</span>
+                    <div class="skills-bar">
+                        <div class="skills-progress" style="width: 70%;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

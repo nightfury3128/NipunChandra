@@ -191,3 +191,27 @@ function initFloatingElements() {
 
 
 document.addEventListener("DOMContentLoaded", createFloatingElements);
+
+// In your JavaScript file
+const themes = {
+    default: {
+        primary: '#3a86ff',
+        accent: '#4cc9f0',
+        hover: '#fb5607'
+    },
+    ocean: {
+        primary: '#1a759f',
+        accent: '#34a0a4',
+        hover: '#184e77'
+    },
+    sunset: {
+        primary: '#e76f51',
+        accent: '#f4a261',
+        hover: '#e9c46a'
+    },
+    forest: {
+        primary: '#40916c',
+        accent: '#52b788',
+        hover: '#2d6a4f'
+    }
+};
